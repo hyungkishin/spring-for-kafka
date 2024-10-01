@@ -1,4 +1,4 @@
-package com.practice.chap1clip1.configuration;
+package com.practice.kafka.configuration;
 
 import org.apache.kafka.clients.admin.AdminClient;
 import org.apache.kafka.clients.admin.NewTopic;

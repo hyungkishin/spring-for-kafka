@@ -1,4 +1,4 @@
-package com.practice.chap1clip1;
+package com.practice.kafka;
 
 import org.apache.kafka.clients.admin.AdminClient;
 import org.apache.kafka.clients.admin.TopicDescription;
@@ -12,10 +12,10 @@ import java.util.Collections;
 import java.util.Map;
 
 @SpringBootApplication
-public class Chap1Clip1Application {
+public class MainApplication {
 
     public static void main(String[] args) {
-        SpringApplication.run(Chap1Clip1Application.class, args);
+        SpringApplication.run(MainApplication.class, args);
     }
 
     @Bean

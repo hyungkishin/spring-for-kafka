@@ -1,10 +1,10 @@
-package com.practice.chap1clip1;
+package com.practice.kafka;
 
 import org.junit.jupiter.api.Test;
 import org.springframework.boot.test.context.SpringBootTest;
 
 @SpringBootTest
-class Chap1Clip1ApplicationTests {
+class MainApplicationTests {
 
     @Test
     void contextLoads() {
