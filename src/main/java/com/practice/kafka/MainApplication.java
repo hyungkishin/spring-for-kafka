@@ -19,21 +19,9 @@ public class MainApplication {
     }
 
     @Bean
-    public ApplicationRunner runner(AdminClient adminClient) {
+    public ApplicationRunner runner() {
         return args -> {
-            Map<String, TopicListing> topics = adminClient.listTopics().namesToListings().get();
-            for (String topicName : topics.keySet()) {
-                TopicListing topicListing = topics.get(topicName); // TopicListing 객체는 토픽명과 internal 명 정도만 보인다.
-                System.out.println("topics.get(topicName) = " + topicListing);
 
-                Map<String, TopicDescription> description = adminClient.describeTopics(Collections.singleton(topicName)).all().get();
-
-                System.out.println("description = " + description);
-
-                if (!topicListing.isInternal()) {
-                    adminClient.deleteTopics(Collections.singleton(topicName));
-                }
-            }
         };
     }
 }
