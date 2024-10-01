@@ -1,15 +1,10 @@
 package com.practice.kafka;
 
-import org.apache.kafka.clients.admin.AdminClient;
-import org.apache.kafka.clients.admin.TopicDescription;
-import org.apache.kafka.clients.admin.TopicListing;
+import com.practice.kafka.producer.ClipProducer;
 import org.springframework.boot.ApplicationRunner;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.context.annotation.Bean;
-
-import java.util.Collections;
-import java.util.Map;
 
 @SpringBootApplication
 public class MainApplication {
@@ -19,9 +14,11 @@ public class MainApplication {
     }
 
     @Bean
-    public ApplicationRunner runner() {
+    public ApplicationRunner runner(ClipProducer clipProducer) {
         return args -> {
-
+            clipProducer.async("clip3", "Hello, Clip3-async");
+            clipProducer.sync("clip3", "Hello, Clip3-sync");
+            Thread.sleep(3000);
         };
     }
 }
