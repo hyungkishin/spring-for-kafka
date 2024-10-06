@@ -1,15 +1,12 @@
 package com.practice.kafka;
 
-import com.practice.kafka.model.Animal;
-import com.practice.kafka.producer.ClipProducer;
+import com.practice.kafka.service.ClipConsumer;
+import com.practice.kafka.service.KafkaManager;
 import org.springframework.boot.ApplicationRunner;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.context.annotation.Bean;
-import org.springframework.context.annotation.ComponentScan;
-import org.springframework.kafka.listener.KafkaMessageListenerContainer;
-
-import java.nio.charset.StandardCharsets;
+import org.springframework.kafka.core.KafkaTemplate;
 
 @SpringBootApplication
 public class MainApplication {
@@ -19,9 +16,17 @@ public class MainApplication {
     }
 
     @Bean
-    public ApplicationRunner runner(ClipProducer clipProducer) {
+    public ApplicationRunner runner(KafkaManager kafkaManager,
+                                    KafkaTemplate<String, String> kafkaTemplate,
+                                    ClipConsumer clipConsumer) {
         return args -> {
-            clipProducer.async("clip4-animal", new Animal("puppy", 10));
+            kafkaManager.describeTopicConfigs();
+            kafkaManager.changeConfig();
+            kafkaManager.findAllConsumerGroups();
+            kafkaManager.findAllOffsets();
+
+            kafkaTemplate.send("clip1-listener", "Hello, Listener.");
+            clipConsumer.seek();
         };
     }
 }
